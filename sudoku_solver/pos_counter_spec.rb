@@ -1,12 +1,12 @@
 require './pos_counter'
 
 describe PosCount do
-  it "should have val and pos entries" do
+  it "should have column and row entries" do
    pc = PosCount.new
-   pc.val = 10
-   pc.pos = 2
-   expect(pc.val).to eq(10)
-   expect(pc.pos).to eq(2)
+   pc.col = 0
+   pc.row = 2
+   expect(pc.col).to eq(0)
+   expect(pc.row).to eq(2)
   end
 end
 
