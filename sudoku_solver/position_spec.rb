@@ -1,12 +1,12 @@
 require './position'
 
 describe Position do
-  it "should have column and row entries" do
-   p = Position.new
-   p.col = 0
-   p.row = 2
-   expect(p.col).to eq(0)
-   expect(p.row).to eq(2)
-  end
+    it "should take a row and col as arguments" do
+        col = 0
+        row = 2
+        p = Position.new row, col
+        expect(p.col).to eq(col)
+        expect(p.row).to eq(row)
+    end
 end
 
