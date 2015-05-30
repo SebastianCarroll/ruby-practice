@@ -1,4 +1,5 @@
 require './sudoku_swap'
+require './position'
 
 describe Sudoku do
     before :each do
