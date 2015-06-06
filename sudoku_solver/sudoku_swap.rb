@@ -34,10 +34,6 @@ class Sudoku
     end
 
     def get_dupes(hash_in)
-        dupes= []
-        hash_in.each do |key,pos|
-            dupes += pos if pos.length > 1
-        end
-        return dupes
+        return hash_in.select{|key,pos| pos.length > 1 }.values.flatten
     end
 end
