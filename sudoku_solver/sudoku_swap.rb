@@ -7,13 +7,14 @@ class Sudoku
 
     def get_duplicate_cells
         dup_in_rows = []
+        dup_in_cols = []
         9.times do |i|
             column = @matrix.column(i)
             row = @matrix.column(i)
-            dup_cells += duplicates_in_column(column, i)
-            dup_cells += duplicates_in_row(row, i)
+            dup_in_cols += duplicates_in_column(column, i)
+            dup_in_rows += duplicates_in_row(row, i)
         end
-        return dup_cells
+        return dup_in_rows.to_set & dup_in_cols.to_set
     end
 
     def duplicates_in_row(row, i)

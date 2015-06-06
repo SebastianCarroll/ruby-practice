@@ -19,16 +19,7 @@ describe Sudoku do
         sudoku = Sudoku.new @matrix
     end
 
-    xit "should find duplicates cells on rows and columns" do
-        sudoku = Sudoku.new @matrix
-        dup_cells = []
-        dup_cells << Position.new(1,1)
-        dup_cells << Position.new(1,6)
-        dup_cells << Position.new(4,1)
-        expect(sudoku.get_duplicate_cells).to match_array(dup_cells)
-    end
-
-    xit "should find duplicates cells on rows and columns dynamically" do
+    it "should find overlapping duplicate values" do
         @matrix = Matrix[
             [5, 6, 2, 5, 7, 1, 9, 8, 3],
             [7, 9, 1, 2, 8, 3, 4, 6, 5],
@@ -42,8 +33,6 @@ describe Sudoku do
         sudoku = Sudoku.new @matrix
         dup_cells = []
         dup_cells << Position.new(0,0)
-        dup_cells << Position.new(0,3)
-        dup_cells << Position.new(2,0)
         expect(sudoku.get_duplicate_cells).to match_array(dup_cells)
     end
 
