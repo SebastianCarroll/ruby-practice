@@ -6,11 +6,11 @@ class Sudoku
     end
 
     def get_duplicate_cells
-        dup_cells = []
+        dup_in_rows = []
         9.times do |i|
             column = @matrix.column(i)
             row = @matrix.column(i)
-            dup_cells += duplicates_in_row(column, i)
+            dup_cells += duplicates_in_column(column, i)
             dup_cells += duplicates_in_row(row, i)
         end
         return dup_cells
@@ -30,7 +30,23 @@ class Sudoku
         row.each_with_index do |val,col|
             hash[val] += [Position.new(i, col)]
         end
-        p hash
+        return hash
+    end
+
+    def duplicates_in_column(col, i)
+        value_hash = get_column_as_hash(col,i)
+        dupes= []
+        value_hash.each do |key,pos|
+            dupes += pos if pos.length > 1
+        end
+        return dupes
+    end
+
+    def get_column_as_hash(col,i)
+        hash = Hash.new []
+        col.each_with_index do |val,row|
+            hash[val] += [Position.new(row, i)]
+        end
         return hash
     end
 end
