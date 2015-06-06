@@ -30,19 +30,14 @@ class Sudoku
     end
 
     def duplicates_in_column(col, i)
-        value_hash = get_column_as_hash(col,i)
+        value_hash = Hash.new []
+        col.each_with_index do |val,row|
+            value_hash[val] += [Position.new(row, i)]
+        end
         dupes= []
         value_hash.each do |key,pos|
             dupes += pos if pos.length > 1
         end
         return dupes
-    end
-
-    def get_column_as_hash(col,i)
-        hash = Hash.new []
-        col.each_with_index do |val,row|
-            hash[val] += [Position.new(row, i)]
-        end
-        return hash
     end
 end
