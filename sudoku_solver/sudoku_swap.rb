@@ -33,17 +33,13 @@ class Sudoku
     def duplicates_in_row(row, i)
         value_hash = Hash.new []
         row.each_with_index do |val,col|
-            value_hash[val] += [Position.new(i,col)]
+            value_hash[val] += [val]
         end
         return get_dupes value_hash
     end
 
     def duplicates_in_column(col, i)
-        value_hash = Hash.new []
-        col.each_with_index do |val,row|
-            value_hash[val] += [Position.new(row, i)]
-        end
-        return get_dupes value_hash
+        col.group_by{|c| c.val}.select{|k,v| v.size > 1}.values.flatten
     end
 
     def get_dupes(hash_in)
