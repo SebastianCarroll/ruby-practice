@@ -37,8 +37,4 @@ class Sudoku
     def duplicates_in_column(col, i)
         col.group_by{|c| c.val}.select{|k,v| v.size > 1}.values.flatten
     end
-
-    def get_dupes(hash_in)
-        return hash_in.select{|key,pos| pos.length > 1 }.values.flatten
-    end
 end
