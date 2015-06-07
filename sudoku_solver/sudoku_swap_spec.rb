@@ -32,28 +32,31 @@ describe Sudoku do
             [8, 2, 9, 7, 3, 5, 1, 4, 6]]
         sudoku = Sudoku.new @matrix
         dup_cells = []
-        dup_cells << Position.new(0,0)
-        dup_cells << Position.new(4,4)
+        dup_cells << Position.new(0,0,5)
+        dup_cells << Position.new(4,4,4)
         expect(sudoku.get_duplicate_cells).to match_array(dup_cells)
     end
 
     it "should find duplicates in a column" do
         sudoku = Sudoku.new @matrix
-        col = [2,3,2]
         i = 0
-        pos_dup = []
-        pos_dup << Position.new(0, i)
-        pos_dup << Position.new(2, i)
-        expect(sudoku.duplicates_in_column(col, i)).to match_array(pos_dup)
+        col = [Position.new(0, i, 2),
+               Position.new(1, i, 3),
+               Position.new(2, i, 2)]
+        expected_dups = col.select{|pos| pos.val == 2}
+        actual_dups = sudoku.duplicates(col)
+        expect(actual_dups).to match_array(expected_dups)
     end
 
     it "should find duplicates in a row" do
         sudoku = Sudoku.new @matrix
-        row = [2,3,2]
         i = 0
-        pos_dup = []
-        pos_dup << Position.new(i, 0)
-        pos_dup << Position.new(i, 2)
-        expect(sudoku.duplicates_in_row(row, i)).to match_array(pos_dup)
+        row = [Position.new(i, 0, 5),
+               Position.new(i, 1, 3),
+               Position.new(i, 2, 3),
+               Position.new(i, 3, 2)]
+        expected_dups = row.select{|pos| pos.val == 3 }
+        actual_dups = sudoku.duplicates(row)
+        expect(actual_dups).to match_array(expected_dups)
     end
 end
