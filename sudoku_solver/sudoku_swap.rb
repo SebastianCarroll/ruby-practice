@@ -23,8 +23,8 @@ class Sudoku
         9.times do |i|
             column = @matrix.column(i)
             row = @matrix.row(i)
-            section = get_section(i)
-            unless all_numbers_in(column) && all_numbers_in(row)
+            section = get_section(i).to_a.flatten
+            unless all_numbers_in(column) && all_numbers_in(row) && all_numbers_in(section)
                 ret=false
                 break
             end
