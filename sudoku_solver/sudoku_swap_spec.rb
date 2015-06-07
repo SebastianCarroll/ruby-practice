@@ -32,8 +32,8 @@ describe Sudoku do
             [8, 2, 9, 7, 3, 5, 1, 4, 6]]
         sudoku = Sudoku.new @matrix
         dup_cells = []
-        dup_cells << Position.new(0,0)
-        dup_cells << Position.new(4,4)
+        dup_cells << Position.new(0,0,5)
+        dup_cells << Position.new(4,4,4)
         expect(sudoku.get_duplicate_cells).to match_array(dup_cells)
     end
 
@@ -57,7 +57,6 @@ describe Sudoku do
                Position.new(i, 3, 2)]
         expected_dups = row.select{|pos| pos.val == 3 }
         actual_dups = sudoku.duplicates_in_row(row, i)
-        p expected_dups, actual_dups
         expect(actual_dups).to match_array(expected_dups)
     end
 end
