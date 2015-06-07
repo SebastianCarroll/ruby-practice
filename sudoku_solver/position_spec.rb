@@ -42,5 +42,11 @@ describe Position do
         hash[p1] = true
         expect(hash.key?(p2)).to be true
     end
+
+    it "should include and optional value" do
+        row, col, val = 2, 4, 7
+        p1 = Position.new row, col, val
+        expect(p1.val).to eq(val)
+    end
 end
 

@@ -1,9 +1,10 @@
 class Position
-    attr_accessor :row, :col
+    attr_accessor :row, :col, :val
 
-    def initialize(row, col)
+    def initialize(row, col, val=-1)
         @row = row
         @col = col
+        @val = val
     end
 
     def ==(position_two)
