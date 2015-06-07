@@ -8,7 +8,8 @@ end
 
 class Sudoku
     def initialize(matrix)
-        @matrix= convert_to_positions(matrix)
+        @matrix= matrix
+        @expected_row = Set.new (1..9)
     end
 
     def convert_to_positions(matrix)
@@ -17,19 +18,28 @@ class Sudoku
         end
     end
 
-    def get_duplicate_cells
-        dup_in_rows = []
-        dup_in_cols = []
+    def correct?
+        ret = true
         9.times do |i|
             column = @matrix.column(i)
             row = @matrix.row(i)
-            dup_in_cols += duplicates(column)
-            dup_in_rows += duplicates(row)
+            section = get_section(i)
+            unless all_numbers_in(column) && all_numbers_in(row)
+                ret=false
+                break
+            end
         end
-        return dup_in_rows.to_set & dup_in_cols.to_set
+        return ret
     end
 
-    def duplicates(elems)
-        elems.group_by{|r| r.val}.select{|k,v| v.size > 1}.values.flatten
+    def all_numbers_in(row)
+        common = row.to_set & @expected_row
+        return common.length == 9
+    end
+
+    def get_section(i)
+        x=(i/3)*3
+        y=(i%3)*3
+        return @matrix.minor(x, 3, y, 3)
     end
 end
