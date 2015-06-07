@@ -45,17 +45,19 @@ describe Sudoku do
                Position.new(2, i, 2)]
         expected_dups = col.select{|pos| pos.val == 2}
         actual_dups = sudoku.duplicates_in_column(col, i)
-        p expected_dups, actual_dups
         expect(actual_dups).to match_array(expected_dups)
     end
 
     it "should find duplicates in a row" do
         sudoku = Sudoku.new @matrix
-        row = [2,3,2]
         i = 0
-        pos_dup = []
-        pos_dup << Position.new(i, 0)
-        pos_dup << Position.new(i, 2)
-        expect(sudoku.duplicates_in_row(row, i)).to match_array(pos_dup)
+        row = [Position.new(i, 0, 5),
+               Position.new(i, 1, 3),
+               Position.new(i, 2, 3),
+               Position.new(i, 3, 2)]
+        expected_dups = row.select{|pos| pos.val == 3 }
+        actual_dups = sudoku.duplicates_in_row(row, i)
+        p expected_dups, actual_dups
+        expect(actual_dups).to match_array(expected_dups)
     end
 end
