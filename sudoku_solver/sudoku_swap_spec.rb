@@ -39,12 +39,14 @@ describe Sudoku do
 
     it "should find duplicates in a column" do
         sudoku = Sudoku.new @matrix
-        col = [2,3,2]
         i = 0
-        pos_dup = []
-        pos_dup << Position.new(0, i)
-        pos_dup << Position.new(2, i)
-        expect(sudoku.duplicates_in_column(col, i)).to match_array(pos_dup)
+        col = [Position.new(0, i, 2),
+               Position.new(1, i, 3),
+               Position.new(2, i, 2)]
+        expected_dups = col.select{|pos| pos.val == 2}
+        actual_dups = sudoku.duplicates_in_column(col, i)
+        p expected_dups, actual_dups
+        expect(actual_dups).to match_array(expected_dups)
     end
 
     it "should find duplicates in a row" do
