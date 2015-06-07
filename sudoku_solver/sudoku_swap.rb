@@ -8,7 +8,6 @@ end
 
 class Sudoku
     def initialize(matrix)
-        #@matrix= matrix
         @matrix= convert_to_positions(matrix)
     end
 
@@ -24,17 +23,13 @@ class Sudoku
         9.times do |i|
             column = @matrix.column(i)
             row = @matrix.row(i)
-            dup_in_cols += duplicates_in_column(column, i)
-            dup_in_rows += duplicates_in_row(row, i)
+            dup_in_cols += duplicates(column)
+            dup_in_rows += duplicates(row)
         end
         return dup_in_rows.to_set & dup_in_cols.to_set
     end
 
-    def duplicates_in_row(row, i)
-        row.group_by{|r| r.val}.select{|k,v| v.size > 1}.values.flatten
-    end
-
-    def duplicates_in_column(col, i)
-        col.group_by{|c| c.val}.select{|k,v| v.size > 1}.values.flatten
+    def duplicates(elems)
+        elems.group_by{|r| r.val}.select{|k,v| v.size > 1}.values.flatten
     end
 end

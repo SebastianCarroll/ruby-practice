@@ -44,7 +44,7 @@ describe Sudoku do
                Position.new(1, i, 3),
                Position.new(2, i, 2)]
         expected_dups = col.select{|pos| pos.val == 2}
-        actual_dups = sudoku.duplicates_in_column(col, i)
+        actual_dups = sudoku.duplicates(col)
         expect(actual_dups).to match_array(expected_dups)
     end
 
@@ -56,7 +56,7 @@ describe Sudoku do
                Position.new(i, 2, 3),
                Position.new(i, 3, 2)]
         expected_dups = row.select{|pos| pos.val == 3 }
-        actual_dups = sudoku.duplicates_in_row(row, i)
+        actual_dups = sudoku.duplicates(row)
         expect(actual_dups).to match_array(expected_dups)
     end
 end
