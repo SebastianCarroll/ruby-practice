@@ -23,7 +23,7 @@ class Sudoku
         dup_in_cols = []
         9.times do |i|
             column = @matrix.column(i)
-            row = @matrix.column(i)
+            row = @matrix.row(i)
             dup_in_cols += duplicates_in_column(column, i)
             dup_in_rows += duplicates_in_row(row, i)
         end
