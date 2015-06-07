@@ -31,11 +31,7 @@ class Sudoku
     end
 
     def duplicates_in_row(row, i)
-        value_hash = Hash.new []
-        row.each_with_index do |val,col|
-            value_hash[val] += [val]
-        end
-        return get_dupes value_hash
+        row.group_by{|r| r.val}.select{|k,v| v.size > 1}.values.flatten
     end
 
     def duplicates_in_column(col, i)
