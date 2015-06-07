@@ -8,7 +8,14 @@ end
 
 class Sudoku
     def initialize(matrix)
-        @matrix= matrix
+        #@matrix= matrix
+        @matrix= convert_to_positions(matrix)
+    end
+
+    def convert_to_positions(matrix)
+        matrix.each_with_index do |e, row, col|
+            matrix[row, col] = Position.new(row, col, e)
+        end
     end
 
     def get_duplicate_cells
