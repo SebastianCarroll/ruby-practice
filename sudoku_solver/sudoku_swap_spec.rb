@@ -45,7 +45,7 @@ describe Sudoku do
         expect(@sudoku.get_section(8)).to eq(@matrix.minor(6..8, 6..8))
     end
 
-    it "should fill missing cells with options" do
+    it "should fill missing cell with missing number" do
         sudoku2 = Sudoku.new(Matrix[
             [4, 6, 2, 5, 7, 1, 9, 8, 3],
             [7, 9, 1, 2, 8, 3, 4, 6, 5],
@@ -60,4 +60,19 @@ describe Sudoku do
         expect(sudoku2[3,0]).to eq(6)
     end
 
+    it "should fill missing cells with missing numbers when all occur in the same row" do
+        sudoku2 = Sudoku.new(Matrix[
+            [4, 6, 2, 5, 7, 1, 9, 8, 3],
+            [7, 9, 1, 2, 8, 3, 4, 6, 5],
+            [5, 8, 3, 6, 4, 9, 2, 7, 1],
+            [nil, 1, 7, 4, 9, 8, nil, 3, 2],
+            [9, 4, 8, 3, 5, 2, 6, 1, 7],
+            [2, 3, 5, 1, 6, 7, 8, 9, 4],
+            [1, 7, 6, 9, 2, 4, 3, 5, 8],
+            [3, 5, 4, 8, 1, 6, 7, 2, 9],
+            [8, 2, 9, 7, 3, 5, 1, 4, 6]])
+        sudoku2.solve
+        expect(sudoku2[3,0]).to eq(6)
+        expect(sudoku2[3,6]).to eq(5)
+    end
 end
