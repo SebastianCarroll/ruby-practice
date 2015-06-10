@@ -9,7 +9,12 @@ end
 class Sudoku
     def initialize(matrix)
         @matrix= matrix
+        @options= Array.new(9) { Array.new(9) {Set.new} }
         @expected_row = Set.new (1..9)
+    end
+
+    def [](row, col)
+        @matrix[row, col]
     end
 
     def convert_to_positions(matrix)
@@ -41,5 +46,20 @@ class Sudoku
         x=(i/3)*3
         y=(i%3)*3
         return @matrix.minor(x, 3, y, 3)
+    end
+
+    def solve
+        @matrix.row_vectors.each_with_index do |row, r|
+            diff = @expected_row - row.to_set
+            row = row.each_with_index do |val,c|
+                if val.nil?
+                    if diff.size == 1
+                        @matrix[r,c] = diff.to_a[0]
+                    else
+                        @options[r][c] = diff if val.nil?
+                    end
+                end
+            end
+        end
     end
 end
