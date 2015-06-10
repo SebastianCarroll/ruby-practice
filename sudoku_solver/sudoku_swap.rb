@@ -49,17 +49,35 @@ class Sudoku
     end
 
     def solve
-        @matrix.row_vectors.each_with_index do |row, r|
-            diff = @expected_row - row.to_set
-            row = row.each_with_index do |val,c|
-                if val.nil?
-                    if diff.size == 1
-                        @matrix[r,c] = diff.to_a[0]
-                    else
-                        @options[r][c] = diff if val.nil?
-                    end
-                end
+        nil_cells = @matrix.each_with_index.select{|v,r,c| v.nil? }
+        nil_cells.each do |v,r,c|
+            options = @options[r][c]
+            if options.length == 0
+                @options[r][c] = @expected_row
+            elsif options.length == 1
+                @matrix[r,c] = options.to_a[0]
+                next
+            end
+            col = @matrix.column(c).to_set
+            row = @matrix.row(r).to_set
+            option = @options[r][c] - col - row
+            if option.length == 1
+                @matrix[r,c] = option.to_a[0]
+            else
+                @options[r][c] = option
             end
         end
+        #@matrix.row_vectors.each_with_index do |row, r|
+        #    diff = @expected_row - row.to_set
+        #    row = row.each_with_index do |val,c|
+        #        if val.nil?
+        #            if diff.size == 1
+        #                @matrix[r,c] = diff.to_a[0]
+        #            else
+        #                @options[r][c] = diff if val.nil?
+        #            end
+        #        end
+        #    end
+        #end
     end
 end
