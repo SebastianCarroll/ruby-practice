@@ -7,6 +7,8 @@ class Matrix
 end
 
 class Sudoku
+    attr_accessor :matrix
+
     def initialize(matrix)
         @matrix= matrix
         @options= Array.new(9) { Array.new(9) {Set.new} }
@@ -66,5 +68,9 @@ class Sudoku
                 @options[r][c] = free
             end
         end
+    end
+
+    def ==(other)
+        @matrix == other.matrix
     end
 end
