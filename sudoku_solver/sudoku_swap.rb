@@ -56,16 +56,18 @@ class Sudoku
     end
 
     def solve
-        nil_cells = @matrix.each_with_index.select{|v,r,c| v.nil?}
-        nil_cells.each do |v,r,c|
-            init_options_cell r,c
-            col = @matrix.column(c).to_set
-            row = @matrix.row(r).to_set
-            free = @options[r][c] - col - row
-            if free.length == 1
-                @matrix[r,c] = free.to_a[0]
-            else
-                @options[r][c] = free
+        until correct?
+            nil_cells = @matrix.each_with_index.select{|v,r,c| v.nil?}
+            nil_cells.each do |v,r,c|
+                init_options_cell r,c
+                col = @matrix.column(c).to_set
+                row = @matrix.row(r).to_set
+                free = @options[r][c] - col - row
+                if free.length == 1
+                    @matrix[r,c] = free.to_a[0]
+                else
+                    @options[r][c] = free
+                end
             end
         end
     end
