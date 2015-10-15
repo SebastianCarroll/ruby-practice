@@ -37,8 +37,8 @@ class TimeReader
         @minutes = minutes
     end
 
-    def plural_min
-        @minutes == 1 ? "" : "s"
+    def plural_min(min)
+        min == 1 ? "" : "s"
     end
 
     def to_s
@@ -49,9 +49,9 @@ class TimeReader
         elsif @minutes > 30
             diff = 60-@minutes
             n_hour = @hour+1
-            @minutes==45 ?  "quarter to #{D_TO_S[@hour+1]}" : "#{D_TO_S[diff]} minutes to #{D_TO_S[@hour+1]}"
+            @minutes==45 ?  "quarter to #{D_TO_S[@hour+1]}" : "#{D_TO_S[diff]} minute#{plural_min diff} to #{D_TO_S[@hour+1]}"
         else
-            "#{D_TO_S[@minutes]} minute#{plural_min} past #{D_TO_S[@hour]}"
+            "#{D_TO_S[@minutes]} minute#{plural_min @minutes} past #{D_TO_S[@hour]}"
         end
     end
 end
