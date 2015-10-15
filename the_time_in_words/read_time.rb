@@ -19,11 +19,15 @@ class TimeReader
         @minutes = minutes
     end
 
+    def plural_min
+        @minutes == 1 ? "" : "s"
+    end
+
     def to_s
         if @minutes==0
-          "#{D_TO_S[@hour]} o' clock"
+            "#{D_TO_S[@hour]} o' clock"
         else
-            "#{D_TO_S[@minutes]} minute past #{D_TO_S[@hour]}"
+            "#{D_TO_S[@minutes]} minute#{plural_min} past #{D_TO_S[@hour]}"
         end
     end
 end
