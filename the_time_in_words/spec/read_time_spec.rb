@@ -13,6 +13,7 @@ describe TimeReader do
         [5,47,"thirteen minutes to six"],
         [5,28,"twenty eight minutes past five"],
         [5,59,"one minute to six"],
+        [12,59,"one minute to one"],
     ].each do |input|
         hour= input[0]
         min= input[1]
