@@ -1,5 +1,5 @@
 class TimeReader
-    HOURS = {
+    D_TO_S = {
         1 => "one",
         2 => "two",
         3 => "three",
@@ -20,6 +20,10 @@ class TimeReader
     end
 
     def to_s
-        "#{HOURS[@hour]} o' clock"
+        if @minutes==0
+          "#{D_TO_S[@hour]} o' clock"
+        else
+            "#{D_TO_S[@minutes]} minute past #{D_TO_S[@hour]}"
+        end
     end
 end
