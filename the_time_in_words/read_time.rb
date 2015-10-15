@@ -55,3 +55,9 @@ class TimeReader
         end
     end
 end
+
+if __FILE__ == $0
+    hour = gets.strip.to_i
+    min = gets.strip.to_i
+    puts TimeReader.new(hour,min).to_s
+end
