@@ -48,7 +48,8 @@ class TimeReader
             "half past #{D_TO_S[@hour]}"
         elsif @minutes > 30
             diff = 60-@minutes
-            "#{D_TO_S[diff]} minutes to #{D_TO_S[@hour+1]}"
+            n_hour = @hour+1
+            @minutes==45 ?  "quarter to #{D_TO_S[@hour+1]}" : "#{D_TO_S[diff]} minutes to #{D_TO_S[@hour+1]}"
         else
             "#{D_TO_S[@minutes]} minute#{plural_min} past #{D_TO_S[@hour]}"
         end
