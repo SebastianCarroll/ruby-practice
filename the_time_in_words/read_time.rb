@@ -26,6 +26,8 @@ class TimeReader
     def to_s
         if @minutes==0
             "#{D_TO_S[@hour]} o' clock"
+        elsif @minutes == 30
+            "half past #{D_TO_S[@hour]}"
         else
             "#{D_TO_S[@minutes]} minute#{plural_min} past #{D_TO_S[@hour]}"
         end
