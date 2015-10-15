@@ -44,6 +44,8 @@ class TimeReader
     def to_s
         if @minutes==0
             "#{D_TO_S[@hour]} o' clock"
+        elsif @minutes == 15
+            "quarter past #{D_TO_S[@hour]}"
         elsif @minutes == 30
             "half past #{D_TO_S[@hour]}"
         elsif @minutes > 30
