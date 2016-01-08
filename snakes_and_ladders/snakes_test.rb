@@ -41,5 +41,20 @@ describe Board do
       moves = Board.new(snakes,ladders).fastest
       moves.must_equal 2
     end
+
+    it "should take the best ladders available  " do
+      ladders = [[12,80], [81,99], [5, 20]]
+      snakes = []
+      moves = Board.new(snakes,ladders).fastest
+      moves.must_equal 4
+    end
+
+    it "should avoid snakes" do
+      ladders = [[12,80], [82,99], [5, 20]]
+      snakes = [[81, 10]]
+      moves = Board.new(snakes,ladders).fastest
+      moves.must_equal 4
+    end
+ 
   end
 end
