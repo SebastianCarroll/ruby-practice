@@ -29,7 +29,17 @@ describe Board do
       ladders = [[1,2],[3,4]]
       snakes = [[5,6],[7,8]]
       vicinity = Board.new(snakes,ladders).get_next_links
-      vicinity.length.must_equal 3
+      snakes << ladders[1]
+        vicinity[3].must_equal 4
+        vicinity[5].must_equal 6
+        vicinity[7].must_equal 8
+    end
+
+    it "should take a ladder when only one exists" do
+      ladders = [[2,99]]
+      snakes = []
+      moves = Board.new(snakes,ladders).fastest
+      moves.must_equal 2
     end
   end
 end

@@ -1,3 +1,7 @@
+require 'set'
+require 'pry'
+require 'pry-nav'
+
 class Board
   attr_accessor :links
   def initialize(snakes, ladders)
@@ -5,17 +9,24 @@ class Board
     add_to_links(snakes,ladders)
     @position = 1
     @moves = 0
+    @front = []
+    @visited = Set.new
   end
 
   def fastest
     until @position == 100
       upcoming = get_next_links
       if upcoming.empty?
-        distance = (100-@position)
-        move = distance>6 ? 6 : distance
-        @position += move
-        @moves += 1
+        @front << [[@position+6,100].min, @moves+1]
+      else
+        upcoming.each do |k,v|
+          @front << [v, @moves+1] unless @visited.include? v
+        end
+        @front << [(@position+6), @moves+1] unless upcoming.key? (@position+6)
       end
+      next_move = @front.shift
+      @visited.add(next_move[0])
+      @position, @moves = next_move
     end 
     @moves
   end
