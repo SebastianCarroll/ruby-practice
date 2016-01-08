@@ -1,6 +1,4 @@
 require 'set'
-require 'pry'
-require 'pry-nav'
 
 class Board
   attr_accessor :links
