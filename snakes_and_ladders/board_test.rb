@@ -31,7 +31,7 @@ describe Board do
       ladders = [[1,2],[3,4]]
       snakes = [[5,6],[7,8]]
       vicinity = Board.new(snakes,ladders).get_moves
-      vicinity.must_equal [2,4,4,6,6,8]
+      vicinity.must_equal [8,6,6,4]
     end
 
     it "should take a ladder when only one exists" do

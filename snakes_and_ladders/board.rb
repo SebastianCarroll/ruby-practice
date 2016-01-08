@@ -25,9 +25,20 @@ class Board
 
   def get_moves
     max = [@position+6,100].min
-    (@position+1).upto(max)
-             .map{|o| @links.key?(o) ? @links[o] : o}
-             .reject{|v| @visited.include? v}
+    moves = []
+    best_non_link = false
+    min = @position+1
+    max.downto(min).each do |i|
+      if @links.key? i
+        moves << @links[i] unless @visited.include? i
+      else
+        if !@visited.include?(i) && !best_non_link
+          moves << i
+          best_non_link = true
+        end
+      end
+    end
+    moves
   end
 
   private
