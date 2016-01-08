@@ -9,12 +9,19 @@ class Board
 
   def fastest
     until @position == 100
-      distance = (100-@position)
-      move = distance>6 ? 6 : distance
-      @position += move
-      @moves += 1
+      upcoming = get_next_links
+      if upcoming.empty?
+        distance = (100-@position)
+        move = distance>6 ? 6 : distance
+        @position += move
+        @moves += 1
+      end
     end 
     @moves
+  end
+
+  def get_next_links
+    @links.select{|k,v| k>@position && k<=(@position+6)}
   end
 
   private

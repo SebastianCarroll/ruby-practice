@@ -24,5 +24,12 @@ describe Board do
         board.links[s].must_equal e
       end
     end
+
+    it "should select links in the next 6 steps" do
+      ladders = [[1,2],[3,4]]
+      snakes = [[5,6],[7,8]]
+      vicinity = Board.new(snakes,ladders).get_next_links
+      vicinity.length.must_equal 3
+    end
   end
 end
