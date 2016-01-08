@@ -10,7 +10,7 @@ describe Board do
       snakes,ladders = []
       board = Board.new(snakes,ladders)
       actual =  board.fastest
-      expected = ([6]*16) << 3
+      expected = 17
       actual.must_equal expected
     end
   end

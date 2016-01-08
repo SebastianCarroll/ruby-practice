@@ -1,10 +1,9 @@
 class Board
-
   def initialize(snakes, ladders)
     @snakes = snakes
     @ladders = ladders
     @position = 1
-    @moves = []
+    @moves = 0
   end
 
   def fastest
@@ -12,7 +11,7 @@ class Board
       distance = (100-@position)
       move = distance>6 ? 6 : distance
       @position += move
-      @moves << move
+      @moves += 1
     end 
     @moves
   end

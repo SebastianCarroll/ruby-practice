@@ -16,5 +16,7 @@ if __FILE__==$0
     # With snakes and ladders we want to adopt that strategy unless we would land on a snake or a shorter path exists up a snake. 
     # We can't use a greedy strategy as we might take a ladder to one layer up only to miss a ladder straight to the end. We also don;t want to avoid snakes entirely. It may be fastest to get a ladder, catch the snake and then get the ladder to the top.
     # Looks like we can't optimise this any more than move 6 if no other options available.
+    # We could brute force but that is just not efficient when we can search.
+    # Since we are looking for shortest path the BFS is probably the most approprate
   end
 end
