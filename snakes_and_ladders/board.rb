@@ -12,16 +12,9 @@ class Board
   end
 
   def fastest
+    # What if no solution possible? How to tell?
     until @position == 100
-      upcoming = get_next_links
-      if upcoming.empty?
-        @front << [[@position+6,100].min, @moves+1]
-      else
-        upcoming.each do |k,v|
-          @front << [v, @moves+1] unless @visited.include? v
-        end
-        @front << [(@position+6), @moves+1] unless upcoming.key? (@position+6)
-      end
+      get_next_links.each{|k,v| @front << [v, @moves+1]}
       next_move = @front.shift
       @visited.add(next_move[0])
       @position, @moves = next_move
@@ -30,7 +23,10 @@ class Board
   end
 
   def get_next_links
-    @links.select{|k,v| k>@position && k<=(@position+6)}
+    links = @links.select{|k,v| k>@position && k<=(@position+6)}
+    max = [@position+6,100].min
+    links[max] ||= max
+    links.reject{|k,v| @visited.include? v}
   end
 
   private

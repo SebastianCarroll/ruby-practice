@@ -64,5 +64,13 @@ describe Board do
       moves = Board.new(snakes,ladders).fastest
       moves.must_equal 5
     end
+
+    # Tests for bug where agent was moving to position > 100
+    it "should ignore all links < 7 moves from goal" do
+      ladders = [[12,80], [81,98], [5, 30]]
+      snakes = [[99, 50]]
+      moves = Board.new(snakes,ladders).fastest
+      moves.must_equal 4
+    end
   end
 end
