@@ -27,14 +27,11 @@ describe Board do
       end
     end
 
-    it "should select links in the next 6 steps" do
+    it "should select links and moves in the next 6 steps" do
       ladders = [[1,2],[3,4]]
       snakes = [[5,6],[7,8]]
-      vicinity = Board.new(snakes,ladders).get_next_links
-      snakes << ladders[1]
-        vicinity[3].must_equal 4
-        vicinity[5].must_equal 6
-        vicinity[7].must_equal 8
+      vicinity = Board.new(snakes,ladders).get_moves
+      vicinity.must_equal [2,4,4,6,6,8]
     end
 
     it "should take a ladder when only one exists" do
@@ -57,7 +54,7 @@ describe Board do
       moves = Board.new(snakes,ladders).fastest
       moves.must_equal 4
     end
- 
+
     it "should take good snakes" do
       ladders = [[12,80], [51,99], [5, 30]]
       snakes = [[81, 50]]

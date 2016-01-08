@@ -1,4 +1,6 @@
 require 'set'
+require 'pry'
+require 'pry-nav'
 
 class Board
   attr_accessor :links
@@ -14,19 +16,20 @@ class Board
   def fastest
     # What if no solution possible? How to tell?
     until @position == 100
-      get_next_links.each{|k,v| @front << [v, @moves+1]}
+      get_moves.each{|v| @front << [v, @moves+1]}
       next_move = @front.shift
+      return -1 if next_move.nil?
       @visited.add(next_move[0])
       @position, @moves = next_move
     end 
     @moves
   end
 
-  def get_next_links
-    links = @links.select{|k,v| k>@position && k<=(@position+6)}
+  def get_moves
     max = [@position+6,100].min
-    links[max] ||= max
-    links.reject{|k,v| @visited.include? v}
+    (@position+1).upto(max)
+             .map{|o| @links.key?(o) ? @links[o] : o}
+             .reject{|v| @visited.include? v}
   end
 
   private
