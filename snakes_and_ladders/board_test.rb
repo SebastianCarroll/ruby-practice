@@ -1,4 +1,6 @@
 require "minitest/autorun"
+require 'pry'
+require 'pry-nav'
 require_relative "board"
 
 describe Board do
