@@ -56,5 +56,11 @@ describe Board do
       moves.must_equal 4
     end
  
+    it "should take good snakes" do
+      ladders = [[12,80], [51,99], [5, 30]]
+      snakes = [[81, 50]]
+      moves = Board.new(snakes,ladders).fastest
+      moves.must_equal 5
+    end
   end
 end
