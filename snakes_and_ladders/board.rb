@@ -1,7 +1,8 @@
 class Board
+  attr_accessor :links
   def initialize(snakes, ladders)
-    @snakes = snakes
-    @ladders = ladders
+    @links = {}
+    add_to_links(snakes,ladders)
     @position = 1
     @moves = 0
   end
@@ -14,5 +15,12 @@ class Board
       @moves += 1
     end 
     @moves
+  end
+
+  private
+  # Can treat snakes and ladders as just 'links'
+  def add_to_links(s,l)
+    s.each{|st,e| @links[st] = e} #unless s.empty?
+    l.each{|st,e| @links[st] = e} #unless s.empty?
   end
 end
