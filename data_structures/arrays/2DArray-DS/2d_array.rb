@@ -24,4 +24,7 @@ Array2D = Struct.new :input do
 end
 
 if __FILE__==$0
+  arr = []
+  6.times{ arr << gets.chomp.split.map(&:to_i)}
+  puts Array2D.new(arr).find_highest_hourglass
 end
