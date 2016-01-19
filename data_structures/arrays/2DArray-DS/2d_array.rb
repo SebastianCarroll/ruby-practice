@@ -1,7 +1,7 @@
 Array2D = Struct.new :input do
   def find_highest_hourglass
     t = input.length
-    max = 0
+    max = -9*7
     1.upto(t-2) do |x|
       1.upto(t-2) do |y|
         max = [max, get_hourglass(x,y).inject(:+)].max
