@@ -23,4 +23,20 @@ describe Array2D do
     highest = Array2D.new(input).find_highest_hourglass
     highest.must_equal 9
   end
+
+  it "should find answer for 4x4 square" do
+    input = [
+      [1, 1, 1, 0, 0, 0,],
+      [0, 1, 0, 0, 0, 0,],
+      [1, 1, 1, 0, 0, 0,],
+      [0, 9, 2, -4, -4, 0,],
+      [0, 0, 0, -2, 0, 0,],
+      [0, 0, -1, -2, -4, 0,],
+    ]
+    highest = Array2D.new(input).find_highest_hourglass
+    highest.must_equal 13 
+  end
+
+
+
 end
